@@ -41,8 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String name = "";
 
-  final TextEditingController _controller =
-      TextEditingController(text: "El nombre aquí");
+  final TextEditingController _controller = TextEditingController(text: "");
 
   @override
   void initState() {
@@ -79,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   await showDialog(
                       context: context,
                       builder: (BuildContext context) {
+                        _controller.text = persons[index].name;
                         return AlertDialog(
                           title: const Text('Elige una opción.'),
                           content: Column(
@@ -105,12 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               TextButton(
                                 onPressed: () {
                                   String updatedName = _controller.text.trim();
-
                                   if (updatedName.isNotEmpty) {
                                     setState(() {
                                       persons[index] = Person(
                                           persons[index].id, updatedName);
                                     });
+
                                     personDao.updatePerson(persons[index]);
 
                                     Fluttertoast.showToast(
