@@ -1,4 +1,4 @@
-name: flutter_application_room
+name: agenda_contactos
 description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
@@ -12,6 +12,7 @@ dependencies:
   floor: ^1.4.2
   sqflite: ^2.3.0
   fluttertoast: ^8.2.10
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:
@@ -19,6 +20,11 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   floor_generator: ^1.4.2
   build_runner: ^2.1.2
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icinoAgenda.jpg"
 
 flutter:
   uses-material-design: true

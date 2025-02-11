@@ -1,6 +1,6 @@
 import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_room/entity/person.dart';
+import 'package:agenda_contactos/entity/person.dart';
 import 'database.dart';
 import 'dao/persona_dao.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,7 +15,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   final AppDatabase database;
 
-  MyApp(this.database);
+  const MyApp(this.database, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends StatefulWidget {
   final AppDatabase database;
 
-  HomeScreen(this.database);
+  const HomeScreen(this.database, {super.key});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -61,12 +61,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Listado')),
+      appBar: AppBar(
+        title: Text('Listado', textAlign: TextAlign.center),
+        backgroundColor: Color.fromARGB(98, 110, 213, 215),
+      ),
       body: FutureBuilder<List<Person>>(
         future: fetchPersons(),
         builder: (context, snapshot) {
-          if (!snapshot.hasData)
+          if (!snapshot.hasData) {
             return Center(child: CircularProgressIndicator());
+          }
           final persons = snapshot.data!;
           return ListView.builder(
             itemCount: persons.length,
@@ -74,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListTile(
                 title: Text(persons[index].name),
                 subtitle: Text('ID: ${persons[index].id}'),
+                hoverColor: Color.fromARGB(0, 69, 223, 154),
                 onLongPress: () async {
                   await showDialog(
                       context: context,
@@ -114,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     personDao.updatePerson(persons[index]);
 
                                     Fluttertoast.showToast(
-                                      msg: "${updatedName} actualizado.",
+                                      msg: "$updatedName actualizado.",
                                       toastLength: Toast.LENGTH_SHORT,
                                       gravity: ToastGravity.BOTTOM,
                                     );
@@ -149,6 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(98, 110, 213, 215),
+        foregroundColor: Color.fromARGB(97, 17, 84, 85),
         onPressed: () async {
           await showDialog(
               context: context,

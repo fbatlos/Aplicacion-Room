@@ -1,6 +1,6 @@
 // dao/person_dao.dart
 import 'package:floor/floor.dart';
-import 'package:flutter_application_room/entity/person.dart';
+import 'package:agenda_contactos/entity/person.dart';
 
 @dao
 abstract class PersonDao {
